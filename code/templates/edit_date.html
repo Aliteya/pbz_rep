@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit date</title>
+</head>
+<body>
+    <form action="/dates/put/{{ date[0] }}" method="post">
+        <label for="opening_date">Opening date:</label>
+        <input type="date" id="opening_date" name="opening_date" value="{{ date[2] }}" required>
+
+        <label for="closing_date">Closing date:</label>
+        <input type="date" id="closing_date" name="closing_date" value="{{ date[3] }}" required>
+
+        <button type="submit">Update date</button>
+    </form>
+</body>
+</html>

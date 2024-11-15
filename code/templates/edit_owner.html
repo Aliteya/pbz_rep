@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Owner</title>
+</head>
+<body>
+    <form action="/owners/put/{{ owner[0] }}" method="post">
+        <label for="contact">Contact:</label>
+        <input type="text" id="contact" name="contact" value="{{ owner[1] }}" required>
+
+        <label for="type_of_owner">Type of Owner:</label>
+        <input type="text" id="type_of_owner" name="type_of_owner" value="{{ owner[2] }}" required>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="{{ owner[3] }}" required>
+
+        <label for="owners_fullname">Full Name:</label>
+        <input type="text" id="owners_fullname" name="owners_fullname" value="{{ owner[4] }}" required>
+
+        <button type="submit">Update Owner</button>
+    </form>
+</body>
+</html>

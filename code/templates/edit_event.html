@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit event</title>
+</head>
+<body>
+    <form action="/events/put/{{ event[0] }}" method="post">
+        <label for="fut_event_date">Future event date:</label>
+        <input type="date" id="fut_event_date" name="fut_event_date" value="{{ event[2] }}" required>
+
+        <label for="event_name">Event name:</label>
+        <input type="text" id="event_name" name="event_name" value="{{ event[3] }}" required>
+
+        <label for="event_type">Event type:</label>
+        <input type="text" id="event_type" name="event_type" value="{{ event[4] }}" required>
+
+        <button type="submit">Update event</button>
+    </form>
+</body>
+</html>

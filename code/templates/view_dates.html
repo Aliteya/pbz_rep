@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dates List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dates List</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Object ID</th>
+                    <th>Openig date</th>
+                    <th>Closing date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for date in dates %}
+                    <tr>
+                        <td>{{ date[0] }}</td> 
+                        <td>{{ date[1] }}</td> 
+                        <td>{{ date[2] }}</td> 
+                        <td>{{ date[3] }}</td>   
+                        <td>
+                            <form action="/dates/{{ date[0] }}" method="post" style="display:inline;">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/dates/put/{{ date[0] }}" method="get" style="display:inline;">
+                                <button type="submit">Edit</button>
+                            </form>
+                        </tr>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <form action="/dates/add" method="post">
+            <input type="date" name="opening_date" placeholder="opening_date" required>
+            <input type="date" name="closing_date" placeholder="closing_date" required>
+            <label for="object_id">Select object:</label>
+            <select name="object_id" id="object_id" required>
+                <option value="">Select an object</option>
+                {% for object in objects %}
+                    <option value="{{ object[0] }}">{{ object[4] }} (ID: {{ object[0] }})</option>  <!-- objects_fullname, object_id -->
+                {% endfor %}
+            </select>
+            <button type="submit">Add date</button>
+        </form>
+    </div>
+
+</body>
+</html>
+

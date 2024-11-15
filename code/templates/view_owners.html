@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owners List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Owners List</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Contact</th>
+                    <th>Type of Owner</th>
+                    <th>Name</th>
+                    <th>Full Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for owner in owners %}
+                    <tr>
+                        <td>{{ owner[0] }}</td>  
+                        <td>{{ owner[1] }}</td>  
+                        <td>{{ owner[2] }}</td>  
+                        <td>{{ owner[3] }}</td>  
+                        <td>{{ owner[4] }}</td>  
+                        <td>
+                            <form action="/owners/{{ owner[0] }}" method="post" style="display:inline;">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/owners/put/{{ owner[0] }}" method="get" style="display:inline;">
+                                <button type="submit">Edit</button>
+                            </form>
+                        </tr>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <form action="/owners/add" method="post">
+            <input type="text" name="contact" placeholder="Contact" required>
+            <input type="text" name="type_of_owner" placeholder="Type of Owner" required>
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="text" name="owners_fullname" placeholder="Full Name" required>
+            <button type="submit">Add Owner</button>
+        </form>
+    </div>
+    
+    
+    
+</body>
+</html>
+

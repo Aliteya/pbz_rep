@@ -1,0 +1,7 @@
+/venv
+/pgdata
+.env
+utils.py
+test.py
+docker-compose.yml
+/app/__pycache__

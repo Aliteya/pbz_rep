@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit popularity</title>
+</head>
+<body>
+    <form action="/popularities/put/{{ popularity[0] }}" method="post">
+        <label for="event_date">Event date:</label>
+        <input type="date" id="event_date" name="event_date" value="{{ popularity[2] }}" required>
+
+        <label for="number_of_visitors">Number of visitors:</label>
+        <input type="number" id="number_of_visitors" name="number_of_visitors" value="{{ popularity[3] }}" required>
+        <button type="submit">Update popularity</button>
+    </form>
+</body>
+</html>

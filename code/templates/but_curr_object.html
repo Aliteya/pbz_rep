@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current objects list</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Objects List</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Owner ID</th>
+                    <th>Type of object</th>
+                    <th>Adress</th>
+                    <th>Name</th>
+                    <th>Number of places</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for object in curr_objects %}
+                    <tr>
+                        <td>{{ object[0] }}</td>  
+                        <td>{{ object[1] }}</td>  
+                        <td>{{ object[2] }}</td>  
+                        <td>{{ object[3] }}</td>  
+                        <td>{{ object[4] }}</td>
+                        <td>{{ object[5] }}</td>  
+                    </tr>
+                {% endfor %} 
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+</html>
+

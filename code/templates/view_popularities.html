@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popularities List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Popularities List</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Object ID</th>
+                    <th>Event date</th>
+                    <th>Number of visitors</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for popularity in popularities %}
+                    <tr>
+                        <td>{{ popularity[0] }}</td>
+                        <td>{{ popularity[1] }}</td>
+                        <td>{{ popularity[2] }}</td>
+                        <td>{{ popularity[3] }}</td> 
+                        <td>
+                            <form action="/popularities/{{ popularity[0] }}" method="post" style="display:inline;">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/popularities/put/{{ popularity[0] }}" method="get" style="display:inline;">
+                                <button type="submit">Edit</button>
+                            </form>
+                        </tr>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <form action="/popularities/add" method="post">
+            <input type="date" name="event_date" placeholder="event_date" required>
+            <input type="number" name="number_of_visitors" placeholder="number_of_visitors" required>
+            <select name="object_id" id="object_id" required>
+                <option value="">Select an object</option>
+                {% for object in objects %}
+                    <option value="{{ object[0] }}">{{ object[4] }} (ID: {{ object[0] }})</option>  <!-- objects_fullname, object_id -->
+                {% endfor %}
+            </select>
+            <button type="submit">Add popularity</button>
+        </form>
+    </div>
+    
+</body>
+</html>
+

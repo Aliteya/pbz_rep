@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objects List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Objects List</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Owner ID</th>
+                    <th>Type of object</th>
+                    <th>Adress</th>
+                    <th>Name</th>
+                    <th>Number of places</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for object in objects %}
+                    <tr>
+                        <td>{{ object[0] }}</td>  
+                        <td>{{ object[1] }}</td>  
+                        <td>{{ object[2] }}</td>  
+                        <td>{{ object[3] }}</td>  
+                        <td>{{ object[4] }}</td>
+                        <td>{{ object[5] }}</td>  
+                        <td>
+                            <form action="/objects/{{ object[0] }}" method="post" style="display:inline;">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/objects/put/{{ object[0] }}" method="get" style="display:inline;">
+                                <button type="submit">Edit</button>
+                            </form>
+                        </tr>
+                    </tr>
+                {% endfor %} 
+            </tbody>
+        </table>
+        <form action="/objects/add" method="post" enctype="multipart/form-data">
+            <input type="text" name="type" placeholder="Type of object" required>
+            <input type="text" name="adress" placeholder="Adress" required>
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="number" name="number_of_places" placeholder="Number of places" required>
+            <label for="owner_id">Select Owner:</label>
+            <select name="owner_id" id="owner_id" required>
+                <option value="">Select an owner</option>
+                {% for owner in owners %}
+                    <option value="{{ owner[0] }}">{{ owner[4] }} (ID: {{ owner[0] }})</option>  <!-- owners_fullname, owner_id -->
+                {% endfor %}
+            </select>
+            <button type="submit">Add object</button>
+        </form>
+    </div>
+    
+</body>
+</html>
+
