@@ -52,7 +52,7 @@
                         <td>{{ popularity[2] }}</td>
                         <td>{{ popularity[3] }}</td> 
                         <td>
-                            <form action="/popularities/{{ popularity[0] }}" method="post" style="display:inline;">
+                            <form action="/popularities/delete/{{ popularity[0] }}" method="post" style="display:inline;">
                                 <button type="submit">Delete</button>
                             </form>
                         </td>
@@ -60,7 +60,7 @@
                             <form action="/popularities/put/{{ popularity[0] }}" method="get" style="display:inline;">
                                 <button type="submit">Edit</button>
                             </form>
-                        </tr>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

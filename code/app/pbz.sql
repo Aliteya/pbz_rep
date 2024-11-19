@@ -1,10 +1,3 @@
-DROP PROCEDURE IF EXISTS add_owner, add_city_object, add_popularity, add_event, add_date, update_city_object, update_owner, update_popularity, update_event, update_date;
-DROP FUNCTION IF EXISTS notify_after_delete, get_city_objects_by_type;
-DROP VIEW current_city_objects CASCADE;
-DROP VIEW upcoming_events CASCADE;
-DROP INDEX IF EXISTS idx_opening_date;
-DROP TABLE IF EXISTS "Владелец", "Место проведения досуга", "Популярность", "Мероприятие", "Дата_открытия";
-
 -- создаем таблички
 
 CREATE TABLE IF NOT EXISTS Владелец (
@@ -202,9 +195,9 @@ RETURNS TABLE (
 ) AS $$
 BEGIN
     RETURN QUERY
-    SELECT *
-    FROM current_city_objects
-    WHERE type = p_type;
+    SELECT c.object_id, c.name, c.type, c.address, c.opening_date, c.closing_date
+    FROM current_city_objects c
+    WHERE c.type = p_type;
 END;
 $$ LANGUAGE plpgsql;
 

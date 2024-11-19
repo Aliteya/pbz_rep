@@ -52,7 +52,7 @@
                         <td>{{ date[2] }}</td> 
                         <td>{{ date[3] }}</td>   
                         <td>
-                            <form action="/dates/{{ date[0] }}" method="post" style="display:inline;">
+                            <form action="/dates/delete/{{ date[0] }}" method="post" style="display:inline;">
                                 <button type="submit">Delete</button>
                             </form>
                         </td>
@@ -60,7 +60,7 @@
                             <form action="/dates/put/{{ date[0] }}" method="get" style="display:inline;">
                                 <button type="submit">Edit</button>
                             </form>
-                        </tr>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

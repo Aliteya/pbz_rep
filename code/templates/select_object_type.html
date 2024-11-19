@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Object Type</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20vh;
+        }
+        input[type="text"], button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 18px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Select Object Type</h1>
+        <form action="/objects/select_type" method="post">
+            <label for="type">Enter Object Type:</label>
+            <select name="type" id="type" required>
+                <option value="">Select type</option>
+                {% for object in objects %}
+                    <option value="{{ object }}">{{ object }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+        
+    </div>
+</body>
+</html>

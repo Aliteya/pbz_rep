@@ -173,7 +173,7 @@ def delete_date(date_id):
 def fetch_current_objects():
     try:
         with conn.cursor() as cursor:
-            cursor.execute("""SELECT * FROM current_city_object;""")
+            cursor.execute("""SELECT * FROM current_city_objects;""")
             curr_objects = cursor.fetchall()
             return curr_objects
     except Exception as e:
@@ -190,10 +190,12 @@ def fetch_upcoming_events():
         print(f"Error fetching upcoming events: {e}")
         return []
     
-def fetch_curr_type_objects():
+def fetch_curr_type_objects(obj_type):
     try:
         with conn.cursor() as cursor:
-            cursor.execute("""SELECT * FROM get_city_objects_by_type;""")
+            cursor.execute("""
+                SELECT * FROM get_city_objects_by_type(%s);
+            """, (obj_type,))
             curr_type_obj = cursor.fetchall()
         return curr_type_obj
     except Exception as e:

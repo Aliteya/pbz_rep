@@ -54,7 +54,7 @@
                         <td>{{ event[3] }}</td>  
                         <td>{{ event[4] }}</td>  
                         <td>
-                            <form action="/events/{{ event[0] }}" method="post" style="display:inline;">
+                            <form action="/events/delete/{{ event[0] }}" method="post" style="display:inline;">
                                 <button type="submit">Delete</button>
                             </form>
                         </td>
@@ -62,7 +62,7 @@
                             <form action="/events/put/{{ event[0] }}" method="get" style="display:inline;">
                                 <button type="submit">Edit</button>
                             </form>
-                        </tr>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

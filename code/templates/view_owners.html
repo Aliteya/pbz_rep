@@ -54,7 +54,7 @@
                         <td>{{ owner[3] }}</td>  
                         <td>{{ owner[4] }}</td>  
                         <td>
-                            <form action="/owners/{{ owner[0] }}" method="post" style="display:inline;">
+                            <form action="/owners/delete/{{ owner[0] }}" method="post" style="display:inline;">
                                 <button type="submit">Delete</button>
                             </form>
                         </td>
@@ -62,7 +62,7 @@
                             <form action="/owners/put/{{ owner[0] }}" method="get" style="display:inline;">
                                 <button type="submit">Edit</button>
                             </form>
-                        </tr>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

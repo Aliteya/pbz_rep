@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Current objects list</title>
+    <title>Current type objects list</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <style>
         body {
@@ -38,16 +38,16 @@
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Owner ID</th>
+                    <th>Object ID</th>
+                    <th>Object name</th>
                     <th>Type of object</th>
                     <th>Adress</th>
-                    <th>Name</th>
-                    <th>Number of places</th>
+                    <th>Opening date</th>
+                    <th>Closing date</th>
                 </tr>
             </thead>
             <tbody>
-                {% for object in curr_type_objects %}
+                {% for object in cur_type_objects %}
                     <tr>
                         <td>{{ object[0] }}</td>  
                         <td>{{ object[1] }}</td>  

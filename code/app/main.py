@@ -13,6 +13,11 @@ app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 logging.basicConfig(level=logging.DEBUG)
 
+@app.get("/", response_class=HTMLResponse)
+def menu_page(request: Request):
+    return templates.TemplateResponse("menu.html", {"request": request})
+
+
 @app.post("/owners/add")
 def create_owner(contact: str = Form(...), type_of_owner: str = Form(...), name: str = Form(...), owners_fullname : str = Form(...)):
     try:
@@ -156,7 +161,7 @@ def edit_date(request: Request, opening_date: date = Form(...), closing_date: da
         raise HTTPException(status_code=500, detail=str(e))
 
 # удаление 
-@app.post("/owners/{owner_id}")
+@app.post("/owners/delete/{owner_id}")
 def remove_owner(request: Request):
     try:
         owner_id = request.path_params['owner_id']
@@ -165,7 +170,7 @@ def remove_owner(request: Request):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.post("/objects/{object_id}")
+@app.post("/objects/delete/{object_id}")
 def remove_object(request: Request):
     try:
         object_id = request.path_params['object_id']
@@ -174,7 +179,7 @@ def remove_object(request: Request):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     
-@app.post("/popularities/{popularity_id}")
+@app.post("/popularities/delete/{popularity_id}")
 def remove_popularity(request: Request):
     try:
         popularity_id = request.path_params['popularity_id']
@@ -183,7 +188,7 @@ def remove_popularity(request: Request):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     
-@app.post("/events/{event_id}")
+@app.post("/events/delete/{event_id}")
 def remove_event(request: Request):
     try:
         event_id = request.path_params['event_id']
@@ -192,7 +197,7 @@ def remove_event(request: Request):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     
-@app.post("/dates/{date_id}")
+@app.post("/dates/delete/{date_id}")
 def remove_date(request: Request):
     try:
         date_id = request.path_params['date_id']
@@ -212,10 +217,28 @@ def view_upcoming_events(request: Request):
     upcoming_events = fetch_upcoming_events()
     return templates.TemplateResponse("upcoming_events.html", {"request": request, "upcoming_events": upcoming_events})
 
-@app.get("/objects/current_type")
-def view_curr_type_objects(request: Request):
-    cur_type_objects = fetch_curr_type_objects()
-    return templates.TemplateResponse("but_curr_type_object.html", {"request": request, "curr_type_objects": cur_type_objects})
+@app.get("/objects/select_type", response_class=HTMLResponse)
+def select_object_type_page(request: Request):
+    objects = list(set([i[2] for i in get_objects()]))
+    return templates.TemplateResponse(
+        "select_object_type.html", 
+        {"request": request, "objects": objects}
+    )
+
+
+@app.post("/objects/select_type", response_class=HTMLResponse)
+def view_objects_by_type(request: Request, type: str = Form(...)):
+    try:
+        logging.debug(type)
+        cur_type_objects = fetch_curr_type_objects(type) 
+        logging.debug(cur_type_objects)
+        return templates.TemplateResponse(
+            "but_curr_type_object.html", 
+            {"request": request, "cur_type_objects": cur_type_objects, "type": type}
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 #----обычные-----селекты----------
 @app.get("/owners/", response_class=HTMLResponse)
